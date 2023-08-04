@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import com.example.c23.model.DogsApi
+import com.example.c23.model.recipe.RecipesApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,14 +20,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-     //   getRandomDog()
-        getByBreed("akita")
+        //   getRandomDog()
+        //   getByBreed("akita")
+        getRecipess()
     }
 
-    private fun getByBreed(query:String) {
+    private fun getRecipess() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val call = getRetrofit().create(RecipesApi::class.java).getAllRecipes()
+            val body = call.body()
+            Log.d("TAG", "getRecipess: $body")
+        }
+    }
+
+    private fun getByBreed(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(DogsApi::class.java).getByBreed("$query/images")
-            val body =call.body()
+            val body = call.body()
             Log.d("TAG", "getByBreed: $body")
         }
     }
@@ -38,10 +48,12 @@ class MainActivity : AppCompatActivity() {
             Log.d("TAG", "getRandomDog: $body")
         }
     }
+
     fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
- //           .baseUrl("https://dog.ceo/api/breeds/image/") // getRandomDog
-            .baseUrl("https://dog.ceo/api/breed/") // getbyBreed
+            //           .baseUrl("https://dog.ceo/api/breeds/image/") // getRandomDog
+            //.baseUrl("https://dog.ceo/api/breed/") // getbyBreed
+            .baseUrl("https://demo3038897.mockable.io/") // getRecipess
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
