@@ -11,6 +11,7 @@
         android:id="@+id/et_timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="10"
         android:inputType="number" />
 
     <LinearLayout
