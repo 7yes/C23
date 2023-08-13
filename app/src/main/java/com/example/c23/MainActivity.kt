@@ -11,12 +11,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnBroadcast.setOnClickListener {
-            //
-        }
 
-        binding.btnNotification.setOnClickListener {
-            //
-        }
     }
 }
