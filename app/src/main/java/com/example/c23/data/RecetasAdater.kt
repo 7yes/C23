@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.c23.R
 import com.example.c23.data.model.RecetasResponseItem
 
-class RecetasAdater(val recetasList: List<RecetasResponseItem>) :
+class RecetasAdater(val recetasList: List<RecetasResponseItem>, private val onClickLis:(RecetasResponseItem)->Unit) :
     RecyclerView.Adapter<RecetasVH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecetasVH {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -17,6 +17,6 @@ class RecetasAdater(val recetasList: List<RecetasResponseItem>) :
 
     override fun onBindViewHolder(holder: RecetasVH, position: Int) {
         val item = recetasList[position]
-        holder.bind(item)
+        holder.bind(item, onClickLis)
     }
 }

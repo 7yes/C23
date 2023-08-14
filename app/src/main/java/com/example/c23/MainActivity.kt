@@ -2,6 +2,7 @@ package com.example.c23
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.c23.data.RecetasAdater
@@ -26,9 +27,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRV() {
-        adater = RecetasAdater(recetasList)
+        adater = RecetasAdater(recetasList){onItemSelected(it)}
         binding.rvRecetas.layoutManager = LinearLayoutManager(this)
         binding.rvRecetas.adapter = adater
+    }
+
+    private fun onItemSelected(it: RecetasResponseItem) {
+Toast.makeText(this,it.name,Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart() {

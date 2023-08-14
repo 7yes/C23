@@ -8,8 +8,9 @@ import com.squareup.picasso.Picasso
 
 class RecetasVH(view: View):RecyclerView.ViewHolder(view) {
     private val binding = ItemRecetasBinding.bind(view)
-    fun bind(item: RecetasResponseItem) {
+    fun bind(item: RecetasResponseItem, onClickLis:(RecetasResponseItem) -> Unit) {
         binding.tvName.text = item.name
         Picasso.get().load(item.photo).into(binding.ivPhoto)
+        itemView.setOnClickListener { onClickLis(item) }
     }
 }
