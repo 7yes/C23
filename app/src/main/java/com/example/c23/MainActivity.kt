@@ -1,5 +1,6 @@
 package com.example.c23
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -34,6 +35,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun onItemSelected(it: RecetasResponseItem) {
 Toast.makeText(this,it.name,Toast.LENGTH_SHORT).show()
+        val intent = Intent(this,DetailActivity::class.java)
+        intent.putExtra("NAME",it.name)
+        intent.putExtra("PHOTO",it.photo)
+        intent.putExtra("DESCR",it.description)
+        startActivity(intent)
     }
 
     override fun onStart() {
