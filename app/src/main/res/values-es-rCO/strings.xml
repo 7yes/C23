@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">C23</string>
+    <string name="set_a_quantity">Una cantidad</string>
+    <string name="send">Enviar</string>
+    <string name="button">Boton</string>
+</resources>
