@@ -1,8 +1,10 @@
 package com.example.c23
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.c23.databinding.ActivityMainBinding
+import com.example.ui.components.QuantityDialog
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -11,6 +13,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnButton.setOnClickListener {
 
+        }
+
+        binding.btnButton.setOnClickListener {
+            val dialog = QuantityDialog(
+                onSubmitClickLis = {
+                    Toast.makeText(this, "typed q: $it ", Toast.LENGTH_SHORT).show()
+                }
+            ).show(supportFragmentManager, "dialog") //parentFragmentmanager en Frag
+        }
     }
 }
