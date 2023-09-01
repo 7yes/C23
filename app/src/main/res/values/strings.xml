@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">C23</string>
+    <string name="pomodoro">Pomodoro</string>
+    <string name="alarm">Alarm</string>
+    <string name="short_break">Short Break</string>
+    <string name="_initial_pomodoro">25</string>
+    <string name="_initial_break">5</string>
+    <string name="save">Save</string>
 </resources>
