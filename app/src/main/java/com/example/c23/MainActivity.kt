@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val seconds = binding.etTimer.text.toString().toInt() * 1000
         val intent = Intent(context, Receiver::class.java)
         val pendingIntent =
-            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_MUTABLE)
         when (s) {
             "create" -> {
                 alarmMgr.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + seconds, pendingIntent)
