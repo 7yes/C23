@@ -1,5 +1,6 @@
 package com.example.c23
 
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.c23.databinding.ActivityMainBinding
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,34 +26,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         createChannel()
-        simpleNotification()
+        scheduleNotification()
         setContentView(binding.root)
     }
 
-    fun simpleNotification() {
-        val intent = Intent(this,MainActivity::class.java).apply {
-           // esta flags evita que se abran mas applicaiones y evitar abrirla 3 o 4 veces etc
-            flags= Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        }
+    private fun scheduleNotification(){
+        val intent = Intent(applicationContext,AlarmNotification::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,1,intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_IMMUTABLE)
-        var builder = NotificationCompat.Builder(this, MY_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("My Title")
-            .setContentText("This is an Example")
-            .setStyle(
-                NotificationCompat.BigTextStyle()
-                    .bigText("bla bla bla y mas bla bal bla")
-            )
-            .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-        with(NotificationManagerCompat.from(this)) {
-            notify(1, builder.build())
-        }
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, Calendar.getInstance().timeInMillis + 10000,pendingIntent)
+        // Calerdar.timeinmillis
     }
-
-    fun createChannel() {
+    private fun createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 MY_CHANNEL_ID,
