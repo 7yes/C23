@@ -2,7 +2,9 @@ package com.example.c23
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +29,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun simpleNotification() {
+        val intent = Intent(this,MainActivity::class.java).apply {
+           // esta flags evita que se abran mas applicaiones y evitar abrirla 3 o 4 veces etc
+            flags= Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_IMMUTABLE)
         var builder = NotificationCompat.Builder(this, MY_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("My Title")
@@ -35,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 NotificationCompat.BigTextStyle()
                     .bigText("bla bla bla y mas bla bal bla")
             )
+            .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         with(NotificationManagerCompat.from(this)) {
