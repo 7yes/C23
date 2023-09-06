@@ -1,4 +1,4 @@
-package com.example.c23
+package com.example.c23.ui.activies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
