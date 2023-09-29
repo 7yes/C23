@@ -1,6 +1,7 @@
 package com.example.c23
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+        binding.btnNext.setOnClickListener {
+            val intent = Intent(this, FlowLiveDataActivity::class.java)
+             startActivity(intent)
         }
     }
 
